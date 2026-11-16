@@ -1,0 +1,3 @@
+/target
+choco/*.nupkg
+choco/tools/hold.exe

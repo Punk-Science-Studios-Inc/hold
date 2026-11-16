@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>hold</id>
+    <version>0.0.0</version>
+    <title>Hold</title>
+    <authors>Darryl Wright</authors>
+    <owners>Darryl Wright</owners>
+    <projectUrl>https://github.com/punkscience/hold</projectUrl>
+    <projectSourceUrl>https://github.com/punkscience/hold</projectSourceUrl>
+    <licenseUrl>https://github.com/punkscience/hold/blob/main/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>https://github.com/punkscience/hold/releases</releaseNotes>
+    <tags>keep-awake caffeine sleep tray</tags>
+    <summary>Tray app that keeps Windows awake while you are away.</summary>
+    <description>Hold is a small Windows tray app that stops the computer from sleeping while it is on.
+
+* Open eye: Hold is on. Closed eye: Hold is off. Left-click the icon to switch.
+* Right-click for "Keep display on" and Quit.
+* Starts at login for every user on the machine.
+* While on, and once the user has been idle for 50 seconds, Hold sends a synthetic zero-distance mouse move about once a minute. The pointer does not move, but Windows counts it as input, so apps that watch for idle time see the user as present.
+* On battery, Hold turns itself off when the charge drops below 10%, and turns back on when power is reconnected.
+
+Hold makes no network calls and stores one per-user registry value.</description>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

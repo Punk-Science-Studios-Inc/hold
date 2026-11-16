@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check tag matches Cargo.toml
+        id: version
+        shell: pwsh
+        run: |
+          $version = '${{ github.ref_name }}'.TrimStart('v')
+          $cargo = (Select-String -Path Cargo.toml -Pattern '^version = "(.+)"' | Select-Object -First 1).Matches[0].Groups[1].Value
+          if ($version -ne $cargo) { throw "Tag v$version does not match Cargo.toml version $cargo" }
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Test
+        run: cargo test
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Checksum
+        id: hash
+        shell: pwsh
+        run: |
+          $hash = (Get-FileHash target/release/hold.exe -Algorithm SHA256).Hash
+          "$hash  hold.exe" | Set-Content -NoNewline hold.exe.sha256
+          "sha256=$hash" >> $env:GITHUB_OUTPUT
+
+      - name: GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          Copy-Item target/release/hold.exe hold.exe
+          gh release view '${{ github.ref_name }}' 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create '${{ github.ref_name }}' hold.exe hold.exe.sha256 --title '${{ github.ref_name }}' --generate-notes
+          }
+
+      - name: Pack Chocolatey package
+        shell: pwsh
+        run: |
+          $version = '${{ steps.version.outputs.version }}'
+          Copy-Item target/release/hold.exe choco/tools/hold.exe
+          (Get-Content choco/hold.nuspec -Raw) -replace '<version>0.0.0</version>', "<version>$version</version>" |
+            Set-Content choco/hold.nuspec -NoNewline
+          (Get-Content choco/tools/VERIFICATION.txt -Raw) -replace '\{\{VERSION\}\}', $version -replace '\{\{SHA256\}\}', '${{ steps.hash.outputs.sha256 }}' |
+            Set-Content choco/tools/VERIFICATION.txt -NoNewline
+          choco pack choco/hold.nuspec --outputdirectory choco
+
+      - name: Push to Chocolatey community feed
+        shell: pwsh
+        env:
+          CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
+        run: |
+          $pkg = Get-ChildItem choco/*.nupkg | Select-Object -First 1
+          choco push $pkg.FullName --source https://push.chocolatey.org/ --api-key $env:CHOCOLATEY_API_KEY
