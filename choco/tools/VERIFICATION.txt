@@ -4,12 +4,12 @@ in verifying that this package's contents are trustworthy.
 
 hold.exe is built from source by GitHub Actions and attached to the release:
 
-  https://github.com/punkscience/hold/releases/tag/v{{VERSION}}
+  https://github.com/Punk-Science-Studios-Inc/hold/releases/tag/v{{VERSION}}
 
 To verify:
 
 1. Download hold.exe from:
-   https://github.com/punkscience/hold/releases/download/v{{VERSION}}/hold.exe
+   https://github.com/Punk-Science-Studios-Inc/hold/releases/download/v{{VERSION}}/hold.exe
 2. Get its checksum:
    Get-FileHash hold.exe -Algorithm SHA256
 3. It must match the checksum of tools\hold.exe in this package:
@@ -17,4 +17,4 @@ To verify:
    SHA256: {{SHA256}}
 
 The release workflow is public at
-https://github.com/punkscience/hold/blob/main/.github/workflows/release.yml
+https://github.com/Punk-Science-Studios-Inc/hold/blob/main/.github/workflows/release.yml

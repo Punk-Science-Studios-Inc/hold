@@ -6,11 +6,11 @@
     <title>Hold</title>
     <authors>Darryl Wright</authors>
     <owners>Darryl Wright</owners>
-    <projectUrl>https://github.com/punkscience/hold</projectUrl>
-    <projectSourceUrl>https://github.com/punkscience/hold</projectSourceUrl>
-    <licenseUrl>https://github.com/punkscience/hold/blob/main/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Punk-Science-Studios-Inc/hold</projectUrl>
+    <projectSourceUrl>https://github.com/Punk-Science-Studios-Inc/hold</projectSourceUrl>
+    <licenseUrl>https://github.com/Punk-Science-Studios-Inc/hold/blob/main/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>https://github.com/punkscience/hold/releases</releaseNotes>
+    <releaseNotes>https://github.com/Punk-Science-Studios-Inc/hold/releases</releaseNotes>
     <tags>keep-awake caffeine sleep tray</tags>
     <summary>Tray app that keeps Windows awake while you are away.</summary>
     <description>Hold is a small Windows tray app that stops the computer from sleeping while it is on.

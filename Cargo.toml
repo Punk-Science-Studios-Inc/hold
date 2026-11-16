@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 description = "Keeps Windows awake from the system tray"
-repository = "https://github.com/punkscience/hold"
+repository = "https://github.com/Punk-Science-Studios-Inc/hold"
 
 [dependencies.windows]
 version = "=0.62.2"

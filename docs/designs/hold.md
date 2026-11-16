@@ -522,7 +522,7 @@ browser.
 
 ## Detailed Implementation Plan
 
-Repository: `github.com/punkscience/hold`, MIT licence, default branch `main`.
+Repository: `github.com/Punk-Science-Studios-Inc/hold`, MIT licence, default branch `main`.
 Crate versions are pinned to the latest release on the day the project is
 created and are locked in `Cargo.lock`.
 
